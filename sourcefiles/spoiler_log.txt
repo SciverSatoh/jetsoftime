@@ -1,0 +1,26 @@
+Key ItemLocations:
+  Truce Canyon 1: pendant
+  Ozzie's Fort Guillotines 3: heromedal
+  Denadoro Mts Entrance 1: moonstone
+  Lab 16 1: tomapop
+  Factory Ruins Right - Factory Floor (Bottom): grandleon
+  Giant's Claw Traps: jerky
+  Sewers 2: roboribbon
+  Northern Ruins Upstairs 600AD: ctrigger
+  Frog's Burrow Left Chest: gatekey
+  Guardia Forest 1000AD Sealed: clone
+  Geno Dome 2nd Floor 3: rubyknife
+  Arris Dome: dreamstone
+  King's Room (Present): hilt
+  Mt Woe 2nd Screen 5: blade
+  Snail Stop: prismshard
+
+
+Character Locations:
+  start: Marle
+  start2: Magus
+  cathedral: Crono
+  castle: Ayla
+  proto: Frog
+  burrow: Robo
+  dactyl: Lucca
