@@ -3,3 +3,4 @@ sourcefiles/__pycache__/*
 sourcefiles/__pycache__/randomizer.cpython-39.pyc
 sourcefiles/out/*
 *.sfc
+*.lnk
