@@ -1,3 +1,23 @@
+"""
+if provided_key == "pop":    0xE3
+if provided_key == "hilt":    0x51
+if provided_key == "blade":    0x50
+if provided_key == "stone":    0xDC
+if provided_key == "knife":    0xE0
+if provided_key == "gate":    0xD7
+if provided_key == "bike":    0xD5
+if provided_key == "jerky":    0xDB
+if provided_key == "pendant":    0xD6
+if provided_key == "moon":    0xDE
+if provided_key == "prism":    0xD8
+if provided_key == "masa2":    0x42
+if provided_key == "clone":    0xE2
+if provided_key == "trigger":    0xD9
+if provided_key == "medal":    0xB3
+if provided_key == "ribbon":    0xB8
+key items to be added to charm tables.
+"""
+
 import struct as st
 import random as rand
 import patcher as bossmutator
