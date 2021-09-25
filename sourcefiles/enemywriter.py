@@ -1,26 +1,31 @@
 """
+if provided_key == "masa2":    0x42
+if provided_key == "jerky":    0xDB
+if provided_key == "bike":    0xD5
+if provided_key == "ribbon":    0xB8
+
 if provided_key == "pop":    0xE3
+if provided_key == "prism":    0xD8
+if provided_key == "moon":    0xDE
+if provided_key == "medal":    0xB3
+
 if provided_key == "hilt":    0x51
 if provided_key == "blade":    0x50
-if provided_key == "stone":    0xDC
-if provided_key == "knife":    0xE0
-if provided_key == "gate":    0xD7
-if provided_key == "bike":    0xD5
-if provided_key == "jerky":    0xDB
-if provided_key == "pendant":    0xD6
-if provided_key == "moon":    0xDE
-if provided_key == "prism":    0xD8
-if provided_key == "masa2":    0x42
-if provided_key == "clone":    0xE2
 if provided_key == "trigger":    0xD9
-if provided_key == "medal":    0xB3
-if provided_key == "ribbon":    0xB8
+if provided_key == "clone":    0xE2
+if provided_key == "knife":    0xE0
+
+if provided_key == "stone":    0xDC
+if provided_key == "gate":    0xD7
+if provided_key == "pendant":    0xD6
 key items to be added to charm tables.
 """
 
 import struct as st
 import random as rand
 import patcher as bossmutator
+lkitems = [0xE3,0xD8,0xDE,0xB3]
+hkitems = [0xDC,0xD7,0xD6]
 llvlitems = [0x95,0x98,0x99,0x97,0x96,0xA4,0x02,0x03,0x12,0x13,0x20,0x21,0x2F,0x30,0x3C,0x7E,0x7F,0x80,0x5C,0x5D,0x5E,
 0x5F,0x60,0x61]
 llvlconsumables = [0xBD,0xBE,0xC6,0xC7,0xC8,0xC9]
@@ -92,7 +97,8 @@ def randomize_enemy_stuff(f,difficulty):
               drop = rand.choice(plvlitems+llvlitems)
           else:
               drop = rand.choice(plvlconsumables+llvlconsumables)
-          charm = drop
+          #charm = drop
+          charm = rand.choice(lkitems+hkitems)
           if rand_num < 5:
               drop = 0	 
           write_enemy_stuff(drop,charm,f,enemy)
@@ -102,7 +108,8 @@ def randomize_enemy_stuff(f,difficulty):
               drop = rand.choice(mlvlitems+glvlitems)
           else:
               drop = rand.choice(mlvlconsumables+glvlconsumables)
-          charm = drop
+          #charm = drop
+          charm = rand.choice(lkitems+hkitems)
           if rand_num < 6:
               drop = 0	 
           write_enemy_stuff(drop,charm,f,enemy)
@@ -112,7 +119,8 @@ def randomize_enemy_stuff(f,difficulty):
               drop = rand.choice(mlvlitems+glvlitems+hlvlitems)
           else:
               drop = rand.choice(mlvlconsumables+glvlconsumables+hlvlconsumables)
-          charm = drop
+          #charm = drop
+          charm = rand.choice(lkitems+hkitems)
           if rand_num < 6:
               drop = 0	 
           write_enemy_stuff(drop,charm,f,enemy)
@@ -122,7 +130,8 @@ def randomize_enemy_stuff(f,difficulty):
               drop = rand.choice(hlvlitems+alvlitems)
           else:
               drop = rand.choice(glvlconsumables+hlvlconsumables+alvlconsumables)
-          charm = drop
+          #charm = drop
+          charm = rand.choice(lkitems+hkitems)
           if rand_num < 7:
               drop = 0	 
           write_enemy_stuff(drop,charm,f,enemy)

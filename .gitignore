@@ -1,3 +1,4 @@
 sourcefiles/__pycache__/*
 *.pyc
 sourcefiles/__pycache__/randomizer.cpython-39.pyc
+sourcefiles/out/*
