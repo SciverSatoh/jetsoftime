@@ -110,10 +110,10 @@ def randomize_enemy_stuff(f,difficulty):
               drop = rand.choice(mlvlconsumables+glvlconsumables)
           #charm = drop
           charm = rand.choice(mkitems+lkitems+[drop])
-          if charm in mkitems:
-              mkitems.remove(charm)
-          if charm in lkitems:
-              lkitems.remove(charm)
+          #if charm in mkitems:
+          #    mkitems.remove(charm)
+          #if charm in lkitems:
+          #    lkitems.remove(charm)
           if rand_num < 6:
               drop = 0	 
           write_enemy_stuff(drop,charm,f,enemy)
@@ -125,10 +125,10 @@ def randomize_enemy_stuff(f,difficulty):
               drop = rand.choice(mlvlconsumables+glvlconsumables+hlvlconsumables)
           #charm = drop
           charm = rand.choice(mkitems+hkitems+[drop])
-          if charm in mkitems:
-              mkitems.remove(charm)
-          if charm in hkitems:
-              hkitems.remove(charm)
+          #if charm in mkitems:
+          #    mkitems.remove(charm)
+          #if charm in hkitems:
+          #    hkitems.remove(charm)
           if rand_num < 6:
               drop = 0	 
           write_enemy_stuff(drop,charm,f,enemy)

@@ -347,6 +347,9 @@ def max_expand_empty_db(orig_db, reassign, dup_duals=False):
 def change_items(from_ind, to_ind, rom,
                  item_dat, item_start,
                  acc_dat, acc_start):
+    
+    #MARKER, SATOH             
+    
     # print("Putting %d's usability into %d's" % (from_ind, to_ind))
     num_items = len(item_dat)//6
 
@@ -424,6 +427,7 @@ def fix_effect_ind(ctl_hdr, bat_grp):
 
 def change_basic_attacks(from_ind, to_ind, orig_db, new_db):
 
+    #MARKER, SATOH
     # Copy the control header -- really just changes the first effect byte
     orig_count = len(orig_db.controls) // TechDB.control_size
     orig_atk_start = orig_count - 7
@@ -1356,9 +1360,10 @@ def change_pc_graphics(from_ind, to_ind,
 # 2) Rewrite the Ayla checks (there are three, one per battle pc) to check
 #    the reassign list instead of the raw pc_id.
 def fix_ayla_fist(rom, reassign):
+    #MARKER, SATOH
     # use the char assignment to determine who is Ayla
     rom[0x4F1100:0x4F1100+len(reassign)] = reassign[:]
-
+    
     # Update the three pre-battle Ayla checks
     """
     $C1/FAC5 AD 2D 5E    LDA $5E2D  [$7E:5E2D]
@@ -1368,18 +1373,18 @@ def fix_ayla_fist(rom, reassign):
     $C1/FACD AD 3F 5E    LDA $5E3F  [$7E:5E3F]
     $C1/FAD0 20 AE FD    JSR $FDAE  [$C1:FDAE]   lv/0x18 to get wpn index
     $C1/FAD3 8D 56 5E    STA $5E56  [$7E:5E56]
-
+    
     $C1/FAC5 5C 10 11 4F    JMP $4F1110
     $C1/FAC9 EA             NOP
     $C1/FACA ---- Same as before
-
+    
     $4F/1100 AD 2D 5E       LDA $5E2D
     $4F/1103 AA             TAX
     $4F/1104 BF 00 11 4F    LDA $4F1100,x
     $4F/1108 C9 05          CMP #05
     $4F/110A 5C CA FA C1    JMP $C1FACA
     """
-
+    
     rom[0x01FAC5:0x01FAC5+5] = bytearray.fromhex('5C 10 11 4F EA')
     ayla_pc1 = bytearray.fromhex('AD 2D 5E' +
                                  'AA' +
@@ -1387,26 +1392,26 @@ def fix_ayla_fist(rom, reassign):
                                  'C9 05' +
                                  '5C CA FA C1')
     rom[0x4F1110:0x4F1110+len(ayla_pc1)] = ayla_pc1
-
+    
     # Other pcs are similar
     # pc2 - LDA $5EAD, pc3 - LDA $5F2D
-
+    
     rom[0x01FADD:0x01FADD+5] = bytearray.fromhex('5C 20 11 4F EA')
     ayla_pc2 = bytearray.fromhex('AD AD 5E' +
                                  'AA' +
                                  'BF 00 11 4F' +
                                  'C9 05' +
                                  '5C E2 FA C1')
-
+    
     rom[0x4F1120:0x4F1120+len(ayla_pc2)] = ayla_pc2
-
+    
     rom[0x01FAF5:0x01FAF5+5] = bytearray.fromhex('5C 30 11 4F EA')
     ayla_pc3 = bytearray.fromhex('AD 2D 5F' +
                                  'AA' +
                                  'BF 00 11 4F' +
                                  'C9 05' +
                                  '5C FA FA C1')
-
+    
     rom[0x4F1130:0x4F1130+len(ayla_pc3)] = ayla_pc3
 
 
@@ -1441,53 +1446,53 @@ def fix_overworld_sprites(rom, rt_start, reassign_start, reassign):
     $C2/2BB6 A0 80 BC    LDY #$BC80
     $C2/2BB9 4C CF 2B    JMP $2BCF  [$C2:2BCF]
     """
-
+    
     rt_write_ptr = to_rom_ptr(rt_start)
-
+    
     if reassign_start is None:
         # Write the reassignment list before the routine
         reassign_start_ptr = to_rom_ptr(rt_start)
         # print('Writing reassign[] @ %X' % reassign_start_ptr)
         rom[reassign_start_ptr:reassign_start_ptr+len(reassign)] = \
             reassign[:]
-
+    
         # Set the routine write pointer just after the reassignment list
         rt_write_ptr = to_rom_ptr(rt_start) + len(reassign)
     else:
         # Otherwise, do what the params say to do
         reassign_start_ptr = to_rom_ptr(reassign_start)
         rt_write_ptr = to_rom_ptr(rt_start)
-
+    
     reassign_start_bytes = to_little_endian(reassign_start_ptr, 3)
-
+    
     rt_start_ptr = rt_write_ptr
     rt_start_bytes = to_little_endian(rt_start_ptr, 3)
-
+    
     pc1_call = bytearray.fromhex('22' + rt_start_bytes.hex())
     pc1_rt = bytearray.fromhex('AF 80 29 7E 29 FF 00 DA AA BF'
                                + reassign_start_bytes.hex()
                                + 'FA 6B')
-
+    
     rt_start_ptr += len(pc1_rt)
     rt_start_bytes = to_little_endian(rt_start_ptr, 3)
-
+    
     pc2_call = bytearray.fromhex('22' + rt_start_bytes.hex())
     pc2_rt = bytearray.fromhex('AF 81 29 7E 29 FF 00 DA AA BF'
                                + reassign_start_bytes.hex()
                                + 'FA 6B')
-
+    
     rt_start_ptr += len(pc2_rt)
     rt_start_bytes = to_little_endian(rt_start_ptr, 3)
-
+    
     pc3_call = bytearray.fromhex('22' + rt_start_bytes.hex())
     pc3_rt = bytearray.fromhex('AF 82 29 7E 29 FF 00 DA AA BF'
                                + reassign_start_bytes.hex()
                                + 'FA 6B')
-
+    
     # write_start was set at the very start
     rom[rt_write_ptr:rt_write_ptr+len(pc1_rt)+len(pc2_rt)+len(pc3_rt)] = \
         (pc1_rt[:]+pc2_rt[:]+pc3_rt[:])
-
+    
     rom[0x022B80:0x022B80+4] = pc1_call[:]
     rom[0x022B8A:0x022B8A+4] = pc1_call[:]
     rom[0x022B94:0x022B94+4] = pc2_call[:]
